@@ -4,8 +4,9 @@ import {
 }
 
 resource "tfe_workspace" "probable_pancake" {
-  name       = "aws-probable-pancake"
-  project_id = "prj-jwafYpMw2Nb6m2Zd"
+  name                  = "aws-probable-pancake"
+  project_id            = "prj-jwafYpMw2Nb6m2Zd"
+  file_triggers_enabled = "false"
   vcs_repo {
     github_app_installation_id = "ghain-ieieBWKoaGhWE3rE"
     identifier                 = "nphilbrook/aws-probable-pancake"
