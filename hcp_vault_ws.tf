@@ -52,13 +52,15 @@ resource "tfe_variable" "hcp_workload_identity_resource" {
 }
 
 
-# ASSOCIATE Global values TO WORKSPACE
-resource "tfe_workspace_variable_set" "global_hcp_vault_admin" {
-  workspace_id    = tfe_workspace.hcp_vault_terraform.id
-  variable_set_id = tfe_variable_set.global_vault_backed.id
-}
-
 # Future - Vault provider
+
+# associate Global values TO workspace
+# resource "tfe_workspace_variable_set" "global_hcp_vault_admin" {
+#   workspace_id    = tfe_workspace.hcp_vault_terraform.id
+#   variable_set_id = tfe_variable_set.global_vault_backed.id
+# }
+
+
 # resource "tfe_variable" "hcp_ws_namespace" {
 #   workspace_id = tfe_workspace.hcp_vault_terraform.id
 
