@@ -13,10 +13,12 @@ resource "tfe_workspace" "vault_admin" {
 resource "tfe_variable" "namespace" {
   for_each     = tfe_workspace.vault_admin
   workspace_id = each.value.id
-  description  = "Vault Namespace for this workspace"
-  key          = "VAULT_NAMESPACE"
-  value        = "admin/${each.key}"
-  category     = "env"
+
+  key      = "VAULT_NAMESPACE"
+  value    = "admin/${each.key}"
+  category = "env"
+
+  description = "Vault Namespace for this workspace"
 }
 
 resource "tfe_variable" "vault_admin_run_role" {
