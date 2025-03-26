@@ -1,13 +1,3 @@
-import {
-  to = tfe_workspace.hcp_vault_terraform
-  id = "ws-pTCEqUgg62CP5Z4b"
-}
-
-import {
-  to = tfe_project.vault_admin
-  id = "prj-jwafYpMw2Nb6m2Zd"
-}
-
 resource "tfe_project" "vault_admin" {
   description  = "Collection of workspaces for administering Vault"
   name         = "SB Vault Lab"
