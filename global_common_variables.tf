@@ -1,5 +1,5 @@
 resource "tfe_variable_set" "global_vault_backed" {
-  name   = "Common Vault-Backed Dynamic AWS Credentials Variables"
+  name   = "Global Vault-Backed Dynamic AWS Credentials Variables"
   global = false
 }
 
