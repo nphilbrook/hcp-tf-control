@@ -1,8 +1,3 @@
-import {
-  to = tfe_workspace.probable_pancake
-  id = "ws-J6PNGjVXWP19mEtu"
-}
-
 resource "tfe_workspace" "probable_pancake" {
   name                  = "aws-probable-pancake"
   project_id            = "prj-jwafYpMw2Nb6m2Zd"
@@ -51,6 +46,12 @@ resource "tfe_variable" "vault_aws_run_role_arn" {
 # END APP/WORKSPACE SPECIFIC
 
 # ASSOCIATE TO WORKSPACE
+# Global
+resource "tfe_workspace_variable_set" "global" {
+  variable_set_id = tfe_variable_set.global_vault_backed.id
+  workspace_id    = tfe_workspace.probable_pancake.id
+}
+
 # Common
 resource "tfe_workspace_variable_set" "common" {
   variable_set_id = tfe_variable_set.common_vault_backed_dynamic_aws_variable_set.id
