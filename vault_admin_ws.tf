@@ -8,6 +8,15 @@ resource "tfe_workspace" "vault_admin" {
     identifier                 = "nphilbrook/vault-admin-terraform"
     branch                     = each.value == "testing" ? each.value : null
   }
+
+}
+
+# Use the agent pool to reach Vault
+resource "tfe_workspace_settings" "settings" {
+  for_each       = tfe_workspace.vault_admin
+  workspace_id   = each.value.id
+  execution_mode = "agent"
+  agent_pool_id  = tfe_agent_pool.aws.id
 }
 
 resource "tfe_variable" "namespace" {
