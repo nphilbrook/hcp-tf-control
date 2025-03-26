@@ -17,21 +17,21 @@ resource "tfe_project" "vault_admin" {
 resource "tfe_workspace" "hcp_vault_terraform" {
   description           = "Management of HCP Vault resources and the admin namespace of the Vault cluster"
   file_triggers_enabled = false
-  name                  = "hcp-vault-terraform"
+  name                  = "hcp-vault-tf"
   organization          = "philbrook"
   project_id            = tfe_project.vault_admin.id
   queue_all_runs        = true
   terraform_version     = "1.11.1"
   vcs_repo {
     github_app_installation_id = "ghain-ieieBWKoaGhWE3rE"
-    identifier                 = "nphilbrook/hcp-vault-tf"
+    identifier                 = "nphilbrook/hcp-vault-terraform"
   }
 }
 
 resource "tfe_variable" "hcp_ws_namespace" {
   workspace_id = tfe_workspace.hcp_vault_terraform.id
   description  = "Vault Namespace for this workspace"
-  key          = "VAULT_NAMESPACE"
+  key          = "TFC_VAULT_NAMESPACE"
   value        = "admin"
   category     = "env"
 }

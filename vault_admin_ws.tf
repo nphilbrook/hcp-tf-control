@@ -14,7 +14,7 @@ resource "tfe_variable" "namespace" {
   for_each     = tfe_workspace.vault_admin
   workspace_id = each.value.id
 
-  key      = "VAULT_NAMESPACE"
+  key      = "TFC_VAULT_NAMESPACE"
   value    = "admin/${each.key}"
   category = "env"
 
