@@ -17,7 +17,7 @@ resource "tfe_project" "vault_admin" {
 resource "tfe_workspace" "hcp_vault_terraform" {
   description           = "Management of HCP Vault resources and the admin namespace of the Vault cluster"
   file_triggers_enabled = false
-  name                  = "hcp-vault-tf"
+  name                  = "hcp-vault-terraform"
   organization          = "philbrook"
   project_id            = tfe_project.vault_admin.id
   queue_all_runs        = true
