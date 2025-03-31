@@ -3,6 +3,7 @@ resource "tfe_workspace" "vault_admin" {
   name                  = "vault-admin-terraform-${each.value}"
   project_id            = local.project_id
   file_triggers_enabled = "false"
+  terraform_version     = "1.6.6"
   vcs_repo {
     github_app_installation_id = "ghain-ieieBWKoaGhWE3rE"
     identifier                 = "nphilbrook/vault-admin-terraform"
