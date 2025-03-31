@@ -27,8 +27,7 @@ resource "tfe_variable" "co_namespace" {
 }
 
 resource "tfe_variable" "co_vault_admin_run_role" {
-  for_each     = tfe_workspace.vault_admin
-  workspace_id = each.value.id
+  workspace_id = tfe_workspace.cloud_ops_mgmt.id
 
   key      = "TFC_VAULT_RUN_ROLE"
   value    = "hcp-tf-management"
@@ -39,7 +38,6 @@ resource "tfe_variable" "co_vault_admin_run_role" {
 
 # ASSOCIATE Global values TO WORKSPACE
 resource "tfe_workspace_variable_set" "co_global_vault_admin" {
-  for_each        = tfe_workspace.vault_admin
-  workspace_id    = each.value.id
+  workspace_id    = tfe_workspace.cloud_ops_mgmt.id
   variable_set_id = tfe_variable_set.global_vault_backed.id
 }
