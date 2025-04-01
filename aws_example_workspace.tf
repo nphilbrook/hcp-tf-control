@@ -38,7 +38,7 @@ resource "tfe_variable" "vault_aws_run_role_arn" {
   variable_set_id = tfe_variable_set.probable_pancake_vault_backed_dynamic_aws_variable_set.id
 
   key      = "TFC_VAULT_BACKED_AWS_RUN_ROLE_ARN"
-  value    = "arn:aws:iam::517068637116:role/dyn-ec2-access"
+  value    = "arn:aws:iam::517068637116:role/s3-full-access"
   category = "env"
 
   description = "Vault AWS role for this workspace"
