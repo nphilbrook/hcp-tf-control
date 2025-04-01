@@ -5,17 +5,6 @@ resource "tfe_variable_set" "common_vault_backed_dynamic_aws_variable_set" {
   global = false
 }
 
-resource "tfe_variable" "vault_namespace" {
-  variable_set_id = tfe_variable_set.common_vault_backed_dynamic_aws_variable_set.id
-
-  key = "TFC_VAULT_NAMESPACE"
-  # TODO: move this once namespaces are designed and deployed
-  value    = "admin"
-  category = "env"
-
-  description = "Vault namespace"
-}
-
 resource "tfe_variable" "enable_vault_backed_aws_provider_auth" {
   variable_set_id = tfe_variable_set.common_vault_backed_dynamic_aws_variable_set.id
 
