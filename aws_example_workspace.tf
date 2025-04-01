@@ -48,7 +48,7 @@ resource "tfe_variable" "vault_namespace" {
   variable_set_id = tfe_variable_set.probable_pancake_vault_backed_dynamic_aws_variable_set.id
 
   key      = "TFC_VAULT_NAMESPACE"
-  value    = "admin/live/Cloud-Operatinos"
+  value    = "admin/live/Cloud-Operations"
   category = "env"
 
   description = "Vault namespace"
