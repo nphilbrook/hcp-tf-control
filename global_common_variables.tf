@@ -17,9 +17,9 @@ resource "tfe_variable" "vault_address" {
   variable_set_id = tfe_variable_set.global_vault_backed.id
 
   key      = "TFC_VAULT_ADDR"
-  value    = "https://vault-cluster-private-vault-e9bf486c.f4702644.z1.hashicorp.cloud:8200/"
+  value    = local.vault_address
   category = "env"
 
-  description = "Vault address"
+  description = "Vault address (environemnt variable for dynamic auth)"
 }
 

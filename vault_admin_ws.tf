@@ -41,6 +41,17 @@ resource "tfe_variable" "vault_admin_run_role" {
   description = "Vault JWT role for this workspace"
 }
 
+resource "tfe_variable" "vault_address_tf" {
+  for_each     = tfe_workspace.vault_admin
+  workspace_id = each.value.id
+
+  key      = "vault_address"
+  value    = local.vault_address
+  category = "terraform"
+
+  description = "Vault address (Terraform variable for SAML setup in workspace code)"
+}
+
 # ASSOCIATE Global values TO WORKSPACE
 resource "tfe_workspace_variable_set" "global_vault_admin" {
   for_each        = tfe_workspace.vault_admin
