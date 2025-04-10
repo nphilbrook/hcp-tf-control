@@ -1,15 +1,15 @@
 # In this iteration we are not going to use these - all mgmt done through the vault-admin-terraform repo
 
-resource "tfe_workspace" "cloud_ops_mgmt" {
-  name                  = "vault-Cloud-Operations-terraform"
-  project_id            = local.project_id
-  file_triggers_enabled = "false"
-  vcs_repo {
-    github_app_installation_id = "ghain-ieieBWKoaGhWE3rE"
-    identifier                 = "nphilbrook/vault-Cloud-Operations-terraform"
-  }
-  force_delete = true
-}
+# resource "tfe_workspace" "cloud_ops_mgmt" {
+#   name                  = "vault-Cloud-Operations-terraform"
+#   project_id            = local.project_id
+#   file_triggers_enabled = "false"
+#   vcs_repo {
+#     github_app_installation_id = "ghain-ieieBWKoaGhWE3rE"
+#     identifier                 = "nphilbrook/vault-Cloud-Operations-terraform"
+#   }
+#   force_delete = true
+# }
 
 # # Use the agent pool to reach Vault
 # resource "tfe_workspace_settings" "co_settings" {
