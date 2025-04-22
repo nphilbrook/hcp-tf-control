@@ -9,33 +9,33 @@ resource "tfe_workspace" "probable_pancake" {
 }
 
 # APP/WORKSPACE SPECIFIC
-resource "tfe_variable_set" "probable_pancake_vault_backed_dynamic_aws_variable_set" {
-  name   = "Probable Pancake Vault-Backed Dynamic AWS Credentials Variables"
+resource "tfe_variable_set" "cloud_ops_vault_backed_dynamic_aws_variable_set" {
+  name   = "Cloud Operations Vault-Backed Dynamic AWS Credentials Variables"
   global = false
 }
 
 resource "tfe_variable" "vault_run_role" {
-  variable_set_id = tfe_variable_set.probable_pancake_vault_backed_dynamic_aws_variable_set.id
+  variable_set_id = tfe_variable_set.cloud_ops_vault_backed_dynamic_aws_variable_set.id
 
   key      = "TFC_VAULT_RUN_ROLE"
-  value    = "hcp-tf-probable-pancake"
+  value    = "aws-dynamic"
   category = "env"
 
   description = "Vault JWT role for this workspace"
 }
 
 resource "tfe_variable" "vault_aws_run_role" {
-  variable_set_id = tfe_variable_set.probable_pancake_vault_backed_dynamic_aws_variable_set.id
+  variable_set_id = tfe_variable_set.cloud_ops_vault_backed_dynamic_aws_variable_set.id
 
   key      = "TFC_VAULT_BACKED_AWS_RUN_VAULT_ROLE"
-  value    = "probable-pancake-tf"
+  value    = "aws-dynamic"
   category = "env"
 
   description = "Vault AWS role for this workspace"
 }
 
 resource "tfe_variable" "vault_aws_run_role_arn" {
-  variable_set_id = tfe_variable_set.probable_pancake_vault_backed_dynamic_aws_variable_set.id
+  variable_set_id = tfe_variable_set.cloud_ops_vault_backed_dynamic_aws_variable_set.id
 
   key      = "TFC_VAULT_BACKED_AWS_RUN_ROLE_ARN"
   value    = "arn:aws:iam::517068637116:role/s3-full-access"
@@ -45,7 +45,7 @@ resource "tfe_variable" "vault_aws_run_role_arn" {
 }
 
 resource "tfe_variable" "vault_namespace" {
-  variable_set_id = tfe_variable_set.probable_pancake_vault_backed_dynamic_aws_variable_set.id
+  variable_set_id = tfe_variable_set.cloud_ops_vault_backed_dynamic_aws_variable_set.id
 
   key      = "TFC_VAULT_NAMESPACE"
   value    = "admin/live/Cloud-Operations"
@@ -71,7 +71,7 @@ resource "tfe_workspace_variable_set" "common" {
 
 # workspace specific
 resource "tfe_workspace_variable_set" "probable_pancake" {
-  variable_set_id = tfe_variable_set.probable_pancake_vault_backed_dynamic_aws_variable_set.id
+  variable_set_id = tfe_variable_set.cloud_ops_vault_backed_dynamic_aws_variable_set.id
   workspace_id    = tfe_workspace.probable_pancake.id
 }
 # END ASSOCIATE TO WORKSPACE
