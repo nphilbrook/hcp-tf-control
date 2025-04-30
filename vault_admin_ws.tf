@@ -1,7 +1,7 @@
 resource "tfe_workspace" "vault_admin" {
   for_each              = local.top_level_namespaces
   name                  = "vault-admin-terraform-${each.value}"
-  project_id            = local.project_id
+  project_id            = tfe_project.vault_admin.id
   file_triggers_enabled = "false"
   vcs_repo {
     github_app_installation_id = "ghain-ieieBWKoaGhWE3rE"

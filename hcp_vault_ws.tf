@@ -1,9 +1,3 @@
-resource "tfe_project" "vault_admin" {
-  description  = "Collection of workspaces for administering Vault"
-  name         = "SB Vault Lab"
-  organization = "philbrook"
-}
-
 resource "tfe_workspace" "hcp_vault_terraform" {
   description           = "Management of HCP Vault resources and the admin namespace of the Vault cluster"
   file_triggers_enabled = false
@@ -16,6 +10,21 @@ resource "tfe_workspace" "hcp_vault_terraform" {
     github_app_installation_id = "ghain-ieieBWKoaGhWE3rE"
     identifier                 = "nphilbrook/hcp-vault-terraform"
   }
+}
+
+# Get a reference to our *own* workspace ID
+# ref locals.tf for
+data "tfe_workspace" "this" {
+  organization = local.org_name
+  name         = local.ws_name
+}
+
+# Use the agent pool to reach Vault
+resource "tfe_workspace_settings" "hcp_vault_tf_settings" {
+  workspace_id = tfe_workspace.hcp_vault_terraform.id
+  # execution_mode = "agent"
+  # agent_pool_id  = tfe_agent_pool.aws.id
+  remote_state_consumer_ids = [data.tfe_workspace.this.id]
 }
 
 resource "tfe_variable" "hcp_ws_namespace" {
