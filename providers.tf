@@ -1,3 +1,3 @@
 provider "tfe" {
-  organization = "philbrook"
+  organization = local.organization
 }

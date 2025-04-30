@@ -52,6 +52,17 @@ resource "tfe_variable" "vault_address_tf" {
   description = "Vault address (Terraform variable for SAML setup in workspace code)"
 }
 
+resource "tfe_variable" "vault_proxy_address" {
+  for_each     = tfe_workspace.vault_admin
+  workspace_id = each.value.id
+
+  key      = "vault_proxy_address"
+  value    = local.vault_proxy_address
+  category = "terraform"
+
+  description = "Vault HCP Identity proxy address (Terraform variable for SAML setup in workspace code)"
+}
+
 # ASSOCIATE Global values TO WORKSPACE
 resource "tfe_workspace_variable_set" "global_vault_admin" {
   for_each        = tfe_workspace.vault_admin
