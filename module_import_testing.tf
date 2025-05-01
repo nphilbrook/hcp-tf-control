@@ -30,3 +30,13 @@ module "workspace_dos" {
   terraform_version = "1.11.4"
   execution_mode    = "local"
 }
+
+module "workspace_tres" {
+  source = "./modules"
+
+  name         = "my-workspace-tres"
+  organization = local.organization
+
+  terraform_version = "1.11.4"
+  execution_mode    = "local"
+}
