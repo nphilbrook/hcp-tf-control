@@ -10,7 +10,6 @@ locals {
 }
 
 # Get a reference to our *own* workspace ID
-# ref locals.tf for
 data "tfe_workspace" "this" {
   organization = local.org_name
   name         = local.ws_name
