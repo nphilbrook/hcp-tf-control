@@ -18,3 +18,7 @@ data "tfe_workspace" "this" {
 output "ws_id" {
   value = data.tfe_workspace.this.id
 }
+
+output "ws_name" {
+  value = terraform.workspace
+}
