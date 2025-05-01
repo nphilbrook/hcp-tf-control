@@ -19,6 +19,16 @@ output "ws_id" {
   value = data.tfe_workspace.this.id
 }
 
-output "ws_name" {
-  value = terraform.workspace
+
+# Alternate method using `terraform.workspace`
+# Need the org name already available
+
+# Get a reference to our *own* workspace ID
+data "tfe_workspace" "still_this" {
+  organization = local.organization
+  name         = terraform.workspace
+}
+
+output "still_ws_id" {
+  value = data.tfe_workspace.this.id
 }
