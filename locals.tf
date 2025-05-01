@@ -12,7 +12,4 @@ locals {
     "testing",
     "live"
   ])
-  slug_parts = split("/", var.TFC_WORKSPACE_SLUG)
-  org_name   = local.slug_parts[0]
-  ws_name    = local.slug_parts[1]
 }

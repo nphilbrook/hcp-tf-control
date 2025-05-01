@@ -12,18 +12,9 @@ resource "tfe_workspace" "hcp_vault_terraform" {
   }
 }
 
-# Get a reference to our *own* workspace ID
-# ref locals.tf for
-data "tfe_workspace" "this" {
-  organization = local.org_name
-  name         = local.ws_name
-}
-
 # Use the agent pool to reach Vault
 resource "tfe_workspace_settings" "hcp_vault_tf_settings" {
-  workspace_id = tfe_workspace.hcp_vault_terraform.id
-  # execution_mode = "agent"
-  # agent_pool_id  = tfe_agent_pool.aws.id
+  workspace_id              = tfe_workspace.hcp_vault_terraform.id
   remote_state_consumer_ids = [data.tfe_workspace.this.id]
 }
 
