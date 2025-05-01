@@ -12,7 +12,8 @@ resource "tfe_workspace" "hcp_vault_terraform" {
   }
 }
 
-# Use the agent pool to reach Vault
+# Share outputs from the hcp-vault-terraform workspace to *THIS* workspace
+# So we can grab the Vault URL for dynamic auth configuration on other namespaces
 resource "tfe_workspace_settings" "hcp_vault_tf_settings" {
   workspace_id = tfe_workspace.hcp_vault_terraform.id
   # ref data.tf for how this ID is sourced
