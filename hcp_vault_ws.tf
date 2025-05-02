@@ -18,6 +18,8 @@ resource "tfe_workspace_settings" "hcp_vault_tf_settings" {
   workspace_id = tfe_workspace.hcp_vault_terraform.id
   # ref data.tf for how this ID is sourced
   remote_state_consumer_ids = [data.tfe_workspace.this.id]
+  execution_mode            = "agent"
+  agent_pool_id             = tfe_agent_pool.aws.id
 }
 
 resource "tfe_variable" "hcp_ws_namespace" {
