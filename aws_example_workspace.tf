@@ -41,7 +41,7 @@ resource "tfe_variable" "vault_aws_run_role_arn" {
   value    = "arn:aws:iam::517068637116:role/s3-full-access"
   category = "env"
 
-  description = "Vault AWS role for this workspace"
+  description = "AWS role ARN for this workspace"
 }
 
 resource "tfe_variable" "vault_namespace" {
@@ -53,6 +53,58 @@ resource "tfe_variable" "vault_namespace" {
 
   description = "Vault namespace"
 }
+
+# For the 2nd AWS account
+resource "tfe_variable" "enable_vault_backed_aws_provider_auth_doormat" {
+  variable_set_id = tfe_variable_set.cloud_ops_vault_backed_dynamic_aws_variable_set.id
+
+  key      = "TFC_VAULT_BACKED_AWS_AUTH_DOORMAT"
+  value    = "true"
+  category = "env"
+
+  description = "Enable dynmaic AWS provider auth backed by Vault (Doormat alias)"
+}
+
+resource "tfe_variable" "aws_auth_type_doormat" {
+  variable_set_id = tfe_variable_set.cloud_ops_vault_backed_dynamic_aws_variable_set.id
+
+  key      = "TFC_VAULT_BACKED_AWS_AUTH_TYPE_DOORMAT"
+  value    = "assumed_role"
+  category = "env"
+
+  description = "Use assumed_role auth type (Doormat alias)"
+}
+
+resource "tfe_variable" "vault_aws_run_role_doormat" {
+  variable_set_id = tfe_variable_set.cloud_ops_vault_backed_dynamic_aws_variable_set.id
+
+  key      = "TFC_VAULT_BACKED_AWS_RUN_VAULT_ROLE_DOORMAT"
+  value    = "aws-dynamic"
+  category = "env"
+
+  description = "Vault AWS role for this workspace (Doormat)"
+}
+
+resource "tfe_variable" "vault_aws_run_role_arn_doormat" {
+  variable_set_id = tfe_variable_set.cloud_ops_vault_backed_dynamic_aws_variable_set.id
+
+  key      = "TFC_VAULT_BACKED_AWS_RUN_ROLE_ARN_DOORMAT"
+  value    = "arn:aws:iam::590184029125:role/vault-assumed-role-credentials-demo"
+  category = "env"
+
+  description = "AWS role ARN for this workspace (Doormat)"
+}
+
+resource "tfe_variable" "vault_aws_path_doormat" {
+  variable_set_id = tfe_variable_set.cloud_ops_vault_backed_dynamic_aws_variable_set.id
+
+  key      = "TFC_VAULT_BACKED_AWS_MOUNT_PATH_DOORMAT"
+  value    = "aws-doormat"
+  category = "env"
+
+  description = "The AWS engine path for the Doormat vault AWS provider alias"
+}
+# End 2nd AWS account
 
 # END APP/WORKSPACE SPECIFIC
 
