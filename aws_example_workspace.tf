@@ -104,6 +104,16 @@ resource "tfe_variable" "vault_aws_path_doormat" {
 
   description = "The AWS engine path for the Doormat vault AWS provider alias"
 }
+
+resource "tfe_variable" "vault_namespace_doormat" {
+  variable_set_id = tfe_variable_set.cloud_ops_vault_backed_dynamic_aws_variable_set.id
+
+  key      = "TFC_VAULT_NAMESPACE_DOORMAT"
+  value    = "admin/live/Cloud-Operations"
+  category = "env"
+
+  description = "Vault namespace"
+}
 # End 2nd AWS account
 
 # END APP/WORKSPACE SPECIFIC
