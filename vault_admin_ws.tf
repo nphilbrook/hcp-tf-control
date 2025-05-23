@@ -8,7 +8,7 @@ resource "tfe_workspace" "vault_admin" {
     identifier                 = "nphilbrook/vault-admin-terraform"
     branch                     = each.value == "testing" ? each.value : null
   }
-
+  ssh_key_id = data.tfe_ssh_key.ssh_key.id
 }
 
 # Use the agent pool to reach Vault

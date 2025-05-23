@@ -32,3 +32,8 @@ data "tfe_workspace" "still_this" {
 output "still_ws_id" {
   value = data.tfe_workspace.still_this.id
 }
+
+data "tfe_ssh_key" "ssh_key" {
+  organization = local.organization
+  name         = "nphilbrook"
+}
