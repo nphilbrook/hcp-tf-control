@@ -30,5 +30,5 @@ data "tfe_workspace" "still_this" {
 }
 
 output "still_ws_id" {
-  value = data.tfe_workspace.this.id
+  value = data.tfe_workspace.still_this.id
 }
