@@ -9,7 +9,7 @@ resource "tfe_workspace" "delightful_otter" {
 }
 
 # Use the agent pool to reach Vault
-resource "tfe_workspace_settings" "settings" {
+resource "tfe_workspace_settings" "otter_settings" {
   workspace_id   = tfe_workspace.delightful_otter.id
   execution_mode = "agent"
   agent_pool_id  = tfe_agent_pool.aws.id
