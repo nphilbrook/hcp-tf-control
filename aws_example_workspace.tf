@@ -134,6 +134,7 @@ resource "tfe_workspace_variable_set" "common" {
 # workspace specific
 resource "tfe_workspace_variable_set" "probable_pancake" {
   variable_set_id = tfe_variable_set.cloud_ops_vault_backed_dynamic_aws_variable_set.id
-  workspace_id    = tfe_workspace.probable_pancake.id
+
+  workspace_id = tfe_workspace.probable_pancake.id
 }
 # END ASSOCIATE TO WORKSPACE
