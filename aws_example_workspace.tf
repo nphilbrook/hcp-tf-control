@@ -55,6 +55,16 @@ resource "tfe_variable" "vault_namespace" {
 }
 
 # For the 2nd AWS account
+resource "tfe_variable" "enable_vault_provider_auth_doormat" {
+  variable_set_id = tfe_variable_set.cloud_ops_vault_backed_dynamic_aws_variable_set.id
+
+  key      = "TFC_VAULT_PROVIDER_AUTH_DOORMAT"
+  value    = "true"
+  category = "env"
+
+  description = "Enable dynmaic Vault provider auth (Doormat alias)"
+}
+
 resource "tfe_variable" "enable_vault_backed_aws_provider_auth_doormat" {
   variable_set_id = tfe_variable_set.cloud_ops_vault_backed_dynamic_aws_variable_set.id
 
@@ -73,6 +83,16 @@ resource "tfe_variable" "aws_auth_type_doormat" {
   category = "env"
 
   description = "Use assumed_role auth type (Doormat alias)"
+}
+
+resource "tfe_variable" "vault_run_role_doormat" {
+  variable_set_id = tfe_variable_set.cloud_ops_vault_backed_dynamic_aws_variable_set.id
+
+  key      = "TFC_VAULT_RUN_ROLE_DOORMAT"
+  value    = "aws-dynamic"
+  category = "env"
+
+  description = "Vault JWT role for this workspace (Doormat)"
 }
 
 resource "tfe_variable" "vault_aws_run_role_doormat" {
