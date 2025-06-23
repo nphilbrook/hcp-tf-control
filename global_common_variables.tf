@@ -23,13 +23,12 @@ resource "tfe_variable" "vault_address" {
   description = "Vault address (environemnt variable for dynamic auth)"
 }
 
-/* resource "tfe_variable" "vault_address_default" {
+resource "tfe_variable" "vault_address_default" {
   variable_set_id = tfe_variable_set.global_vault_backed.id
 
-  key      = "TFC_VAULT_ADDR"
+  key      = "TFC_DEFAULT_VAULT_ADDR"
   value    = local.vault_address
   category = "env"
 
   description = "Vault address (environemnt variable for dynamic auth)"
 }
- */
