@@ -18,7 +18,7 @@ resource "tfe_variable" "vault_run_role" {
   variable_set_id = tfe_variable_set.cloud_ops_vault_backed_dynamic_aws_variable_set.id
 
   key      = "TFC_VAULT_RUN_ROLE"
-  value    = "aws-dynamic"
+  value    = "aws-dynamic-517068637116"
   category = "env"
 
   description = "Vault JWT role for this workspace"
@@ -28,7 +28,7 @@ resource "tfe_variable" "vault_aws_run_role" {
   variable_set_id = tfe_variable_set.cloud_ops_vault_backed_dynamic_aws_variable_set.id
 
   key      = "TFC_VAULT_BACKED_AWS_RUN_VAULT_ROLE"
-  value    = "aws-dynamic"
+  value    = "aws-dynamic-517068637116"
   category = "env"
 
   description = "Vault AWS role for this workspace"
