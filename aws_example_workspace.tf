@@ -85,6 +85,16 @@ resource "tfe_variable" "aws_auth_type_doormat" {
   description = "Use assumed_role auth type (Doormat alias)"
 }
 
+resource "tfe_variable" "vault_aws_config" {
+  variable_set_id = tfe_variable_set.cloud_ops_vault_backed_dynamic_aws_variable_set.id
+
+  key      = "TFC_VAULT_BACKED_AWS_VAULT_CONFIG_DOORMAT"
+  value    = "DOORMAT"
+  category = "env"
+
+  description = "Use assumed_role auth type (Doormat alias)"
+}
+
 resource "tfe_variable" "vault_run_role_doormat" {
   variable_set_id = tfe_variable_set.cloud_ops_vault_backed_dynamic_aws_variable_set.id
 
