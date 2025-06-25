@@ -19,6 +19,17 @@ resource "tfe_workspace_settings" "settings" {
   agent_pool_id  = tfe_agent_pool.aws.id
 }
 
+resource "tfe_variable" "enable_vault_provider_auth" {
+  for_each     = tfe_workspace.vault_admin
+  workspace_id = each.value.id
+
+  key      = "TFC_VAULT_PROVIDER_AUTH"
+  value    = "true"
+  category = "env"
+
+  description = "Enable dynmaic Vault provider auth"
+}
+
 resource "tfe_variable" "vault_address_vault_admin" {
   for_each     = tfe_workspace.vault_admin
   workspace_id = each.value.id
