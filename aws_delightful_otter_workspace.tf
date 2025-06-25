@@ -33,12 +33,6 @@ resource "tfe_workspace_variable_set" "global_otter" {
   workspace_id    = tfe_workspace.delightful_otter.id
 }
 
-# Common
-resource "tfe_workspace_variable_set" "common_otter" {
-  variable_set_id = tfe_variable_set.common_vault_backed_dynamic_aws_variable_set.id
-  workspace_id    = tfe_workspace.delightful_otter.id
-}
-
 # workspace/etc specific
 resource "tfe_workspace_variable_set" "delightful_otter" {
   variable_set_id = tfe_variable_set.cloud_ops_vault_backed_dynamic_aws_variable_set.id

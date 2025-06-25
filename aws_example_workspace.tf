@@ -44,16 +44,6 @@ resource "tfe_variable" "vault_aws_run_role_arn" {
   description = "AWS role ARN for this workspace"
 }
 
-resource "tfe_variable" "vault_namespace" {
-  variable_set_id = tfe_variable_set.cloud_ops_vault_backed_dynamic_aws_variable_set.id
-
-  key      = "TFC_VAULT_NAMESPACE"
-  value    = "admin/live/Cloud-Operations"
-  category = "env"
-
-  description = "Vault namespace"
-}
-
 # For the 2nd AWS account
 resource "tfe_variable" "enable_vault_provider_auth_doormat" {
   variable_set_id = tfe_variable_set.cloud_ops_vault_backed_dynamic_aws_variable_set.id
@@ -73,16 +63,6 @@ resource "tfe_variable" "enable_vault_backed_aws_provider_auth_doormat" {
   category = "env"
 
   description = "Enable dynmaic AWS provider auth backed by Vault (Doormat alias)"
-}
-
-resource "tfe_variable" "aws_auth_type_doormat" {
-  variable_set_id = tfe_variable_set.cloud_ops_vault_backed_dynamic_aws_variable_set.id
-
-  key      = "TFC_VAULT_BACKED_AWS_AUTH_TYPE_DOORMAT"
-  value    = "assumed_role"
-  category = "env"
-
-  description = "Use assumed_role auth type (Doormat alias)"
 }
 
 resource "tfe_variable" "vault_aws_config" {
@@ -135,15 +115,6 @@ resource "tfe_variable" "vault_aws_path_doormat" {
   description = "The AWS engine path for the Doormat vault AWS provider alias"
 }
 
-resource "tfe_variable" "vault_namespace_doormat" {
-  variable_set_id = tfe_variable_set.cloud_ops_vault_backed_dynamic_aws_variable_set.id
-
-  key      = "TFC_VAULT_NAMESPACE_DOORMAT"
-  value    = "admin/live/Cloud-Operations"
-  category = "env"
-
-  description = "Vault namespace"
-}
 # End 2nd AWS account
 
 # END APP/WORKSPACE SPECIFIC
@@ -152,12 +123,6 @@ resource "tfe_variable" "vault_namespace_doormat" {
 # Global
 resource "tfe_workspace_variable_set" "global" {
   variable_set_id = tfe_variable_set.global_vault_backed.id
-  workspace_id    = tfe_workspace.probable_pancake.id
-}
-
-# Common
-resource "tfe_workspace_variable_set" "common" {
-  variable_set_id = tfe_variable_set.common_vault_backed_dynamic_aws_variable_set.id
   workspace_id    = tfe_workspace.probable_pancake.id
 }
 
