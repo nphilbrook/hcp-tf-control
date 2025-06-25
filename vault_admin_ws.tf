@@ -19,7 +19,7 @@ resource "tfe_workspace_settings" "settings" {
   agent_pool_id  = tfe_agent_pool.aws.id
 }
 
-resource "tfe_variable" "enable_vault_provider_auth" {
+resource "tfe_variable" "enable_vault_provider_auth_admin" {
   for_each     = tfe_workspace.vault_admin
   workspace_id = each.value.id
 
