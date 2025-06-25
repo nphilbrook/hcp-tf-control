@@ -19,6 +19,17 @@ resource "tfe_workspace_settings" "settings" {
   agent_pool_id  = tfe_agent_pool.aws.id
 }
 
+resource "tfe_variable" "vault_address_vault_admin" {
+  for_each     = tfe_workspace.vault_admin
+  workspace_id = each.value.id
+
+  key      = "TFC_VAULT_ADDR"
+  value    = local.vault_address
+  category = "env"
+
+  description = "Vault address (environemnt variable for dynamic auth)"
+}
+
 resource "tfe_variable" "namespace" {
   for_each     = tfe_workspace.vault_admin
   workspace_id = each.value.id
@@ -63,9 +74,3 @@ resource "tfe_variable" "vault_proxy_address" {
   description = "Vault HCP Identity proxy address (Terraform variable for SAML setup in workspace code)"
 }
 
-# ASSOCIATE Global values TO WORKSPACE
-resource "tfe_workspace_variable_set" "global_vault_admin" {
-  for_each        = tfe_workspace.vault_admin
-  workspace_id    = each.value.id
-  variable_set_id = tfe_variable_set.global_vault_backed.id
-}
