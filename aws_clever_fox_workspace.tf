@@ -36,7 +36,7 @@ resource "tfe_workspace_variable_set" "global_fox" {
 # END ASSOCIATE TO WORKSPACE
 
 # Configure Vault AWS authentication for this workspace
-module "clever_fox_vault_aws_auth" {
+/* module "clever_fox_vault_aws_auth" {
   source = "git@github.com:nphilbrook/terraform-vault-tfe-workspace-aws-auth.git"
 
   workspace_name    = tfe_workspace.clever_fox.name
@@ -48,3 +48,4 @@ module "clever_fox_vault_aws_auth" {
   # Optional parameters - adjust these as needed for your environment
   vault_namespace_path = "admin/live/Cloud-Operations"
 }
+ */
