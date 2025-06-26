@@ -40,10 +40,9 @@ module "clever_fox_vault_aws_auth" {
   source  = "app.terraform.io/philbrook/tf-workspace-aws-auth/vault"
   version = "1.0.0"
 
-  workspace_name       = tfe_workspace.clever_fox.name
-  workspace_id         = tfe_workspace.clever_fox.id
-  aws_account_ids      = ["517068637116"]
-  aws_iam_role_name    = "s3-full-access"
-  tf_organization      = "philbrook"
-  vault_namespace_path = "admin/live/Cloud-Operations"
+  workspace_name    = tfe_workspace.clever_fox.name
+  workspace_id      = tfe_workspace.clever_fox.id
+  aws_account_ids   = ["517068637116"]
+  aws_iam_role_name = "s3-full-access"
+  tf_organization   = "philbrook"
 }
