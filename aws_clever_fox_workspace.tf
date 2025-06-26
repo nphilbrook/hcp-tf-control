@@ -38,7 +38,7 @@ resource "tfe_workspace_variable_set" "global_fox" {
 # Configure Vault AWS authentication for this workspace
 module "clever_fox_vault_aws_auth" {
   source  = "app.terraform.io/philbrook/tf-workspace-aws-auth/vault"
-  version = "1.0.0"
+  version = "1.0.1"
 
   workspace_name    = tfe_workspace.clever_fox.name
   workspace_id      = tfe_workspace.clever_fox.id
