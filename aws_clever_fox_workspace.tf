@@ -5,7 +5,7 @@ resource "tfe_workspace" "clever_fox" {
   file_triggers_enabled = "false"
   vcs_repo {
     github_app_installation_id = "ghain-ieieBWKoaGhWE3rE"
-    identifier                 = "nphilbrook/aws-probable-pancake"
+    identifier                 = "nphilbrook/aws-clever-fox"
   }
 }
 
@@ -43,6 +43,7 @@ module "clever_fox_vault_aws_auth" {
   workspace_name    = tfe_workspace.clever_fox.name
   workspace_id      = tfe_workspace.clever_fox.id
   aws_account_ids   = ["517068637116"]
+
   aws_iam_role_name = "s3-full-access"
   tf_organization   = "philbrook"
 }
