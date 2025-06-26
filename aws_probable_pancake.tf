@@ -19,7 +19,7 @@ resource "tfe_workspace_variable_set" "global" {
 # Configure Vault AWS authentication for this workspace
 module "probably_pancake_vault_aws_auth" {
   source  = "app.terraform.io/philbrook/tf-workspace-aws-auth/vault"
-  version = "1.0.1"
+  version = "1.0.2"
 
   workspace_name  = tfe_workspace.probable_pancake.name
   workspace_id    = tfe_workspace.probable_pancake.id
