@@ -1,4 +1,4 @@
-resource "tfe_workspace" "happy_panda" {
+/* resource "tfe_workspace" "happy_panda" {
   name                  = "aws-happy-panda"
   project_id            = "prj-jwafYpMw2Nb6m2Zd"
   file_triggers_enabled = "false"
@@ -33,3 +33,4 @@ resource "tfe_workspace_variable_set" "global_panda" {
   workspace_id    = tfe_workspace.happy_panda.id
 }
 # END ASSOCIATE TO WORKSPACE
+ */

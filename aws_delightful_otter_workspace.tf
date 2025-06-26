@@ -1,4 +1,4 @@
-resource "tfe_workspace" "delightful_otter" {
+/* resource "tfe_workspace" "delightful_otter" {
   name                  = "aws-delightful-otter"
   project_id            = "prj-jwafYpMw2Nb6m2Zd"
   file_triggers_enabled = "false"
@@ -34,3 +34,4 @@ resource "tfe_workspace_variable_set" "global_otter" {
 }
 
 # END ASSOCIATE TO WORKSPACE
+ */
