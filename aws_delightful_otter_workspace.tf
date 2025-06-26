@@ -1,4 +1,4 @@
-/* resource "tfe_workspace" "delightful_otter" {
+resource "tfe_workspace" "delightful_otter" {
   name                  = "aws-delightful-otter"
   project_id            = "prj-jwafYpMw2Nb6m2Zd"
   file_triggers_enabled = "false"
@@ -33,5 +33,15 @@ resource "tfe_workspace_variable_set" "global_otter" {
   workspace_id    = tfe_workspace.delightful_otter.id
 }
 
-# END ASSOCIATE TO WORKSPACE
- */
+# Configure Vault AWS authentication for this workspace
+module "otter_vault_aws_auth" {
+  source  = "app.terraform.io/philbrook/tf-workspace-aws-auth/vault"
+  version = "1.0.2"
+
+  workspace_name  = tfe_workspace.delightful_otter.name
+  workspace_id    = tfe_workspace.delightful_otter.id
+  aws_account_ids = ["620929731891", "517068637116"]
+
+  aws_iam_role_name = "s3-full-access"
+  tf_organization   = "philbrook"
+}
