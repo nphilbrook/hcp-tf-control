@@ -36,16 +36,14 @@ resource "tfe_workspace_variable_set" "global_fox" {
 # END ASSOCIATE TO WORKSPACE
 
 # Configure Vault AWS authentication for this workspace
-/* module "clever_fox_vault_aws_auth" {
-  source = "git@github.com:nphilbrook/terraform-vault-tfe-workspace-aws-auth.git"
+module "clever_fox_vault_aws_auth" {
+  source  = "app.terraform.io/philbrook/tf-workspace-aws-auth/vault"
+  version = "1.0.0"
 
-  workspace_name    = tfe_workspace.clever_fox.name
-  workspace_id      = tfe_workspace.clever_fox.id
-  aws_account_ids   = ["517068637116"]
-  aws_iam_role_name = "s3-full-access"
-  tf_organization   = "philbrook"
-
-  # Optional parameters - adjust these as needed for your environment
+  workspace_name       = tfe_workspace.clever_fox.name
+  workspace_id         = tfe_workspace.clever_fox.id
+  aws_account_ids      = ["517068637116"]
+  aws_iam_role_name    = "s3-full-access"
+  tf_organization      = "philbrook"
   vault_namespace_path = "admin/live/Cloud-Operations"
 }
- */
