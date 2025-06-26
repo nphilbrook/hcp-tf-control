@@ -40,7 +40,7 @@ module "otter_vault_aws_auth" {
 
   workspace_name  = tfe_workspace.delightful_otter.name
   workspace_id    = tfe_workspace.delightful_otter.id
-  aws_account_ids = ["620929731891", "517068637116"]
+  aws_account_ids = ["517068637116", "620929731891"]
 
   aws_iam_role_name = "s3-full-access"
   tf_organization   = "philbrook"
