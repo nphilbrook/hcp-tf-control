@@ -72,9 +72,21 @@ resource "tfe_variable" "hcp_workload_identity_resource" {
   description = "HCP workload identity resource name"
 }
 
-
 # ASSOCIATE Global values TO WORKSPACE
 resource "tfe_workspace_variable_set" "global_hcp_vault_admin" {
   workspace_id    = tfe_workspace.hcp_vault_terraform.id
   variable_set_id = tfe_variable_set.global_vault_backed.id
+}
+
+# We're going to override this to false, because in this
+# workspace we need to talk to my HCP AWS account, not my personal account
+# where the dynamic AWS creds actually work for useful things
+resource "tfe_variable" "disable_vault_backed_aws_provider_auth" {
+  workspace_id = tfe_workspace.hcp_vault_terraform.id
+
+  key      = "TFC_VAULT_BACKED_AWS_AUTH"
+  value    = "false"
+  category = "env"
+
+  description = "Disable Vault backed AWS provider auth for this workspace"
 }
