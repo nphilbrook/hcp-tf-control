@@ -12,4 +12,6 @@ locals {
     "testing",
     "live"
   ])
+
+  aws_hvd_vault_address = "https://vault.nick-philbrook.sbx.hashidemos.io:8200"
 }
