@@ -7,7 +7,7 @@ resource "tfe_variable" "aws_hvd_enable_vault_provider_auth" {
   variable_set_id = tfe_variable_set.aws_vault_hvd_onboarding.id
 
   key      = "TFC_VAULT_PROVIDER_AUTH"
-  value    = "true"
+  value    = "false"
   category = "env"
 
   description = "Enable dynamic Vault provider auth"
@@ -31,6 +31,16 @@ resource "tfe_variable" "aws_hvd_vault_address_default" {
   category = "env"
 
   description = "Vault address (environment variable for dynamic auth)"
+}
+
+resource "tfe_variable" "aws_hvd_vault_address_provider" {
+  variable_set_id = tfe_variable_set.aws_vault_hvd_onboarding.id
+
+  key      = "VAULT_ADDR"
+  value    = local.aws_hvd_vault_address
+  category = "env"
+
+  description = "Vault address (environment variable for provider config / static auth)"
 }
 
 # resource "tfe_variable" "vault_namespace" {
