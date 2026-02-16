@@ -1,5 +1,5 @@
 resource "tfe_variable_set" "aws_vault_hvd_onboarding" {
-  name   = "Global Vault-Backed Dynamic AWS Credentials Variables"
+  name   = "Global Variables for AWS HVD Vault LZ Onboarding"
   global = false
 }
 
@@ -10,7 +10,7 @@ resource "tfe_variable" "aws_hvd_enable_vault_provider_auth" {
   value    = "true"
   category = "env"
 
-  description = "Enable dynmaic Vault provider auth"
+  description = "Enable dynamic Vault provider auth"
 }
 
 resource "tfe_variable" "aws_hvd_vault_address" {
@@ -20,7 +20,7 @@ resource "tfe_variable" "aws_hvd_vault_address" {
   value    = local.aws_hvd_vault_address
   category = "env"
 
-  description = "Vault address (environemnt variable for dynamic auth)"
+  description = "Vault address (environment variable for dynamic auth)"
 }
 
 resource "tfe_variable" "aws_hvd_vault_address_default" {
@@ -30,7 +30,7 @@ resource "tfe_variable" "aws_hvd_vault_address_default" {
   value    = local.aws_hvd_vault_address
   category = "env"
 
-  description = "Vault address (environemnt variable for dynamic auth)"
+  description = "Vault address (environment variable for dynamic auth)"
 }
 
 # resource "tfe_variable" "vault_namespace" {
@@ -59,4 +59,9 @@ resource "tfe_project_settings" "aws_hvd_ls_settings" {
 
   default_execution_mode = "agent"
   default_agent_pool_id  = tfe_agent_pool.aws_vault_hvd.id
+}
+
+resource "tfe_project_variable_set" "aws_vault_hvd_onboarding" {
+  project_id      = tfe_project.aws_vault_hvd_lz.id
+  variable_set_id = tfe_variable_set.aws_vault_hvd_onboarding.id
 }
