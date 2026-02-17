@@ -6,9 +6,8 @@ resource "tfe_variable_set" "global_aws_vault_backed" {
 resource "tfe_variable" "enable_vault_provider_auth_aws" {
   variable_set_id = tfe_variable_set.global_aws_vault_backed.id
 
-  key = "TFC_VAULT_PROVIDER_AUTH"
-  # TODO: flip to true once bootstrap is complete
-  value    = "false"
+  key      = "TFC_VAULT_PROVIDER_AUTH"
+  value    = "true"
   category = "env"
 
   description = "Enable dynmaic Vault provider auth"
