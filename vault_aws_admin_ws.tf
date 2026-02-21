@@ -71,3 +71,14 @@ resource "tfe_variable" "vault_address_e2_pr" {
 
   description = "PR cluster Vault address (environment variable for dynamic auth)"
 }
+
+resource "tfe_variable" "aws_ws_vault_admin_run_role_cluster_local" {
+  for_each = toset(["us-east-2", "us-west-2"])
+
+  workspace_id = tfe_workspace.vault_aws_terraform_cluster_local[each.key].id
+  key          = "TFC_VAULT_RUN_ROLE"
+  value        = "hcp-tf-admin"
+  category     = "env"
+
+  description = "Vault JWT role for cluster-local admin workspaces"
+}
