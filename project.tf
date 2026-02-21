@@ -11,14 +11,21 @@ resource "tfe_project" "aws_vault_lab" {
   organization = "philbrook"
 }
 
+resource "tfe_project_settings" "aws_lab_settings" {
+  project_id = tfe_project.aws_vault_lab.id
+
+  default_execution_mode = "agent"
+  default_agent_pool_id  = tfe_agent_pool.aws_vault_hvd.id
+}
+
 resource "tfe_project" "aws_vault_hvd_lz" {
   description  = "Landing zone for HVD-aligned AWS vault onboarding."
-  name         = "AWS Vault HVD"
+  name         = "AWS Vault LZs"
   organization = "philbrook"
 }
 
-resource "tfe_project_settings" "aws_lab_settings" {
-  project_id = tfe_project.aws_vault_lab.id
+resource "tfe_project_settings" "aws_hvd_ls_settings" {
+  project_id = tfe_project.aws_vault_hvd_lz.id
 
   default_execution_mode = "agent"
   default_agent_pool_id  = tfe_agent_pool.aws_vault_hvd.id
