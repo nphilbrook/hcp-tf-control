@@ -38,3 +38,36 @@ resource "tfe_workspace_variable_set" "global_aws_vault_admin" {
   workspace_id    = tfe_workspace.vault_aws_terraform.id
   variable_set_id = tfe_variable_set.global_aws_vault_backed.id
 }
+
+# CLUSTER-LOCAL CONFIGS - per-cluster
+resource "tfe_workspace" "vault_aws_terraform_cluster_local" {
+  for_each              = toset(["us-east-2", "us-west-2"])
+  description           = "Management cluster-local Vault config on my AWS Lab vault clusters"
+  file_triggers_enabled = false
+  name                  = "vault-aws-admin-terraform-${each.key}"
+  organization          = "philbrook"
+  project_id            = tfe_project.aws_vault_lab.id
+  queue_all_runs        = true
+  terraform_version     = "1.14.5"
+  vcs_repo {
+    github_app_installation_id = "ghain-ieieBWKoaGhWE3rE"
+    identifier                 = "nphilbrook/vault-aws-admin-terraform-cluster-local"
+  }
+}
+
+resource "tfe_workspace_variable_set" "global_aws_vault_admin_cluster_local" {
+  for_each        = toset(["us-east-2", "us-west-2"])
+  workspace_id    = tfe_workspace.vault_aws_terraform_cluster_local[each.key].id
+  variable_set_id = tfe_variable_set.global_aws_vault_backed.id
+}
+
+# OVERRIDE for PR cluster
+resource "tfe_variable" "vault_address_e2_pr" {
+  workspace_id = tfe_workspace.vault_aws_terraform_cluster_local["us-east-2"].id
+
+  key      = "TFC_VAULT_ADDR"
+  value    = local.aws_hvd_pr_vault_address
+  category = "env"
+
+  description = "PR cluster Vault address (environment variable for dynamic auth)"
+}

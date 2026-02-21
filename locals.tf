@@ -13,5 +13,6 @@ locals {
     "live"
   ])
 
-  aws_hvd_vault_address = "https://vault.nick-philbrook.sbx.hashidemos.io:8200"
+  aws_hvd_vault_address    = "https://vault.nick-philbrook.sbx.hashidemos.io:8200"
+  aws_hvd_pr_vault_address = "https://vault-pr.nick-philbrook.sbx.hashidemos.io:8200"
 }
