@@ -23,3 +23,15 @@ resource "tfe_project_variable_set" "global_aws_vault_lz" {
   project_id      = tfe_project.aws_vault_hvd_lz.id
   variable_set_id = tfe_variable_set.global_aws_vault_backed.id
 }
+
+# A team for admin'ing this project - mostly for AI agents
+resource "tfe_team" "onboarding_admin" {
+  name = "AWS HVD Vault LZ Onboarding Admins"
+}
+
+resource "tfe_team_project_access" "onboarding_admin_access" {
+  team_id    = tfe_team.onboarding_admin.id
+  project_id = tfe_project.aws_vault_hvd_lz.id
+
+  access = "admin"
+}
