@@ -24,22 +24,22 @@ resource "tfe_variable" "enable_vault_provider_auth_admin" {
   workspace_id = each.value.id
 
   key      = "TFC_VAULT_PROVIDER_AUTH"
-  value    = "true"
+  value    = "false"
   category = "env"
 
   description = "Enable dynmaic Vault provider auth"
 }
 
-resource "tfe_variable" "vault_address_vault_admin" {
-  for_each     = tfe_workspace.vault_admin
-  workspace_id = each.value.id
+# resource "tfe_variable" "vault_address_vault_admin" {
+#   for_each     = tfe_workspace.vault_admin
+#   workspace_id = each.value.id
 
-  key      = "TFC_VAULT_ADDR"
-  value    = local.vault_address
-  category = "env"
+#   key      = "TFC_VAULT_ADDR"
+#   value    = local.vault_address
+#   category = "env"
 
-  description = "Vault address (environemnt variable for dynamic auth)"
-}
+#   description = "Vault address (environemnt variable for dynamic auth)"
+# }
 
 resource "tfe_variable" "namespace" {
   for_each     = tfe_workspace.vault_admin
@@ -63,25 +63,25 @@ resource "tfe_variable" "vault_admin_run_role" {
   description = "Vault JWT role for this workspace"
 }
 
-resource "tfe_variable" "vault_address_tf" {
-  for_each     = tfe_workspace.vault_admin
-  workspace_id = each.value.id
+# resource "tfe_variable" "vault_address_tf" {
+#   for_each     = tfe_workspace.vault_admin
+#   workspace_id = each.value.id
 
-  key      = "vault_address"
-  value    = local.vault_address
-  category = "terraform"
+#   key      = "vault_address"
+#   value    = local.vault_address
+#   category = "terraform"
 
-  description = "Vault address (Terraform variable for SAML setup in workspace code)"
-}
+#   description = "Vault address (Terraform variable for SAML setup in workspace code)"
+# }
 
-resource "tfe_variable" "vault_proxy_address" {
-  for_each     = tfe_workspace.vault_admin
-  workspace_id = each.value.id
+# resource "tfe_variable" "vault_proxy_address" {
+#   for_each     = tfe_workspace.vault_admin
+#   workspace_id = each.value.id
 
-  key      = "vault_proxy_address"
-  value    = local.vault_proxy_address
-  category = "terraform"
+#   key      = "vault_proxy_address"
+#   value    = local.vault_proxy_address
+#   category = "terraform"
 
-  description = "Vault HCP Identity proxy address (Terraform variable for SAML setup in workspace code)"
-}
+#   description = "Vault HCP Identity proxy address (Terraform variable for SAML setup in workspace code)"
+# }
 
