@@ -18,29 +18,31 @@ resource "tfe_workspace_settings" "hcp_vault_tf_settings" {
   workspace_id = tfe_workspace.hcp_vault_terraform.id
   # ref data.tf for how this ID is sourced
   remote_state_consumer_ids = [data.tfe_workspace.this.id]
-  execution_mode            = "agent"
-  agent_pool_id             = tfe_agent_pool.aws.id
+  execution_mode            = "remote"
+  # agent_pool_id             = tfe_agent_pool.aws.id
 }
 
-resource "tfe_variable" "hcp_ws_namespace" {
-  workspace_id = tfe_workspace.hcp_vault_terraform.id
+# Removed all of these as part of HCP Vault tear-down.
+# Still need to auth to HCP, but not Vault
+# resource "tfe_variable" "hcp_ws_namespace" {
+#   workspace_id = tfe_workspace.hcp_vault_terraform.id
 
-  key      = "TFC_VAULT_NAMESPACE"
-  value    = "admin"
-  category = "env"
+#   key      = "TFC_VAULT_NAMESPACE"
+#   value    = "admin"
+#   category = "env"
 
-  description = "Vault Namespace for this workspace"
-}
+#   description = "Vault Namespace for this workspace"
+# }
 
-resource "tfe_variable" "hcp_ws_vault_admin_run_role" {
-  workspace_id = tfe_workspace.hcp_vault_terraform.id
+# resource "tfe_variable" "hcp_ws_vault_admin_run_role" {
+#   workspace_id = tfe_workspace.hcp_vault_terraform.id
 
-  key      = "TFC_VAULT_RUN_ROLE"
-  value    = "hcp-tf-admin"
-  category = "env"
+#   key      = "TFC_VAULT_RUN_ROLE"
+#   value    = "hcp-tf-admin"
+#   category = "env"
 
-  description = "Vault JWT role for this workspace"
-}
+#   description = "Vault JWT role for this workspace"
+# }
 
 resource "tfe_variable" "hcp_workload_identity" {
   workspace_id = tfe_workspace.hcp_vault_terraform.id
@@ -72,21 +74,21 @@ resource "tfe_variable" "hcp_workload_identity_resource" {
   description = "HCP workload identity resource name"
 }
 
-# ASSOCIATE Global values TO WORKSPACE
-resource "tfe_workspace_variable_set" "global_hcp_vault_admin" {
-  workspace_id    = tfe_workspace.hcp_vault_terraform.id
-  variable_set_id = tfe_variable_set.global_vault_backed.id
-}
+# # ASSOCIATE Global values TO WORKSPACE
+# resource "tfe_workspace_variable_set" "global_hcp_vault_admin" {
+#   workspace_id    = tfe_workspace.hcp_vault_terraform.id
+#   variable_set_id = tfe_variable_set.global_vault_backed.id
+# }
 
-# We're going to override this to false, because in this
-# workspace we need to talk to my HCP AWS account, not my personal account
-# where the dynamic AWS creds actually work for useful things
-resource "tfe_variable" "disable_vault_backed_aws_provider_auth" {
-  workspace_id = tfe_workspace.hcp_vault_terraform.id
+# # We're going to override this to false, because in this
+# # workspace we need to talk to my HCP AWS account, not my personal account
+# # where the dynamic AWS creds actually work for useful things
+# resource "tfe_variable" "disable_vault_backed_aws_provider_auth" {
+#   workspace_id = tfe_workspace.hcp_vault_terraform.id
 
-  key      = "TFC_VAULT_BACKED_AWS_AUTH"
-  value    = "false"
-  category = "env"
+#   key      = "TFC_VAULT_BACKED_AWS_AUTH"
+#   value    = "false"
+#   category = "env"
 
-  description = "Disable Vault backed AWS provider auth for this workspace"
-}
+#   description = "Disable Vault backed AWS provider auth for this workspace"
+# }
