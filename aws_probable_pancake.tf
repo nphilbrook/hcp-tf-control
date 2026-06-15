@@ -17,14 +17,14 @@ resource "tfe_workspace_variable_set" "global" {
 # END ASSOCIATE TO WORKSPACE
 
 # Configure Vault AWS authentication for this workspace
-module "probably_pancake_vault_aws_auth" {
-  source  = "app.terraform.io/philbrook/tf-workspace-aws-auth/vault"
-  version = "1.0.2"
+# module "probably_pancake_vault_aws_auth" {
+#   source  = "app.terraform.io/philbrook/tf-workspace-aws-auth/vault"
+#   version = "1.0.2"
 
-  workspace_name  = tfe_workspace.probable_pancake.name
-  workspace_id    = tfe_workspace.probable_pancake.id
-  aws_account_ids = ["517068637116", "620929731891"]
+#   workspace_name  = tfe_workspace.probable_pancake.name
+#   workspace_id    = tfe_workspace.probable_pancake.id
+#   aws_account_ids = ["517068637116", "620929731891"]
 
-  aws_iam_role_name = "s3-full-access"
-  tf_organization   = "philbrook"
-}
+#   aws_iam_role_name = "s3-full-access"
+#   tf_organization   = "philbrook"
+# }
